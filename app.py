@@ -4,6 +4,7 @@ from PIL import Image
 from torchvision.transforms import ToTensor
 from flask_cors import CORS
 import numpy as np
+from Nudenet import NudityDetector
 
 app = Flask(__name__)
 CORS(app)
@@ -13,8 +14,7 @@ def has_detection_above_threshold(image_data, alcohol_model_path, weapons_model_
     im = Image.open(image_data).convert('RGB')
     im = im.resize((640, 640))
     im_data = ToTensor()(im)[None]
-    
-    
+
     size = np.array([[640, 640]], dtype=np.int64)
     
     
